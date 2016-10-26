@@ -20,12 +20,7 @@ public interface VertexInterface {
 	 * @return
 	 */
 	public List<VertexInterface> getSuccesor();
-	/**
-	 * return if this vertex is belong to ASet
-	 * @param Aset
-	 * @return
-	 */
-	public boolean isContainedTo(ASetInterface Aset);
+	
 	
 	
 }
