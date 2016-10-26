@@ -1,4 +1,10 @@
-package tp04;
+package main;
+
+import interfaces.ASetInterface;
+import interfaces.GraphInterface;
+import interfaces.PiInterface;
+import interfaces.PreviousInterface;
+import interfaces.VertexInterface;
 
 public class Dijkstra {
 	public PreviousInterface dijkstra(GraphInterface g,VertexInterface r,ASetInterface a,PiInterface pi,PreviousInterface previous){
