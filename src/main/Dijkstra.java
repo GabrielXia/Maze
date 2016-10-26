@@ -12,7 +12,7 @@ public class Dijkstra {
 		
 		for(int j=1;j<g.getNumberOfVertex();j++){
 			for(VertexInterface y:pivot.getSuccesor()){
-				if(y.isContainedTo(a))continue;
+				if(a.contains(y))continue;
 				if(pi.getDistanceMinimal(pivot)+pivot.getDistanceTo(y)<pi.getDistanceMinimal(y)){
 					pi.setDistanceMinimal(y, pi.getDistanceMinimal(pivot)+pivot.getDistanceTo(y));
 					previous.setFatherTo(pivot,y);
@@ -23,7 +23,7 @@ public class Dijkstra {
 			double minimal = Double.POSITIVE_INFINITY;
 			VertexInterface y = null;
 			for(VertexInterface i:g.getAllVertex()){
-				if(i.isContainedTo(a))continue;
+				if(a.contains(i))continue;
 				if(pi.getDistanceMinimal(i)<minimal){
 					minimal = pi.getDistanceMinimal(i);
 					y = i;
