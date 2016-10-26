@@ -15,11 +15,6 @@ public interface VertexInterface {
 	 * @return
 	 */
 	public double getDistanceTo(VertexInterface other);
-	/**
-	 * return a list of succesor of this vertex
-	 * @return
-	 */
-	public List<VertexInterface> getSuccesor();
 	
 	
 	
