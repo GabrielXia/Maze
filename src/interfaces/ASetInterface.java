@@ -1,4 +1,4 @@
-package tp04;
+package interfaces;
 
 public interface ASetInterface {
 	/**
@@ -6,5 +6,12 @@ public interface ASetInterface {
 	 * @param vertex
 	 */
 	public void add(VertexInterface vertex);
+	
+	/**
+	 * returns True if Aset contains vertex and False otherwise
+	 * @param vertex
+	 * @return
+	 */
+	public boolean contains(VertexInterface vertex);
 	
 }

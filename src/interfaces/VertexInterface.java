@@ -1,4 +1,4 @@
-package tp04;
+package interfaces;
 
 import java.util.List;
 
@@ -15,17 +15,7 @@ public interface VertexInterface {
 	 * @return
 	 */
 	public double getDistanceTo(VertexInterface other);
-	/**
-	 * return a list of succesor of this vertex
-	 * @return
-	 */
-	public List<VertexInterface> getSuccesor();
-	/**
-	 * return if this vertex is belong to ASet
-	 * @param Aset
-	 * @return
-	 */
-	public boolean isContainedTo(ASetInterface Aset);
+	
 	
 	
 }

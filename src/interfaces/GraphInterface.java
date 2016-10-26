@@ -1,4 +1,4 @@
-package tp04;
+package interfaces;
 
 import java.util.List;
 
@@ -29,4 +29,10 @@ public interface GraphInterface {
 	 * @return
 	 */
 	public int getNumberOfVertex();
+	/**
+	 * return the list of the successors of  vertex
+	 * @param vertex
+	 * @return
+	 */
+	public List<VertexInterface> getSuccesor(VertexInterface vertex);
 }
