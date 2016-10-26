@@ -1,4 +1,4 @@
-package tp04;
+package interfaces;
 
 public interface ASetInterface {
 	/**
