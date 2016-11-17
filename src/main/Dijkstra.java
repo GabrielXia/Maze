@@ -17,7 +17,7 @@ public class Dijkstra {
 		}
 		
 		for(int j=1;j<g.getNumberOfVertex();j++){
-			for(VertexInterface y:pivot.getSuccesor()){
+			for(VertexInterface y:g.getSuccesor(pivot)){
 				if(a.contains(y))continue;
 				if(pi.getDistanceMinimal(pivot)+pivot.getDistanceTo(y)<pi.getDistanceMinimal(y)){
 					pi.setDistanceMinimal(y, pi.getDistanceMinimal(pivot)+pivot.getDistanceTo(y));
