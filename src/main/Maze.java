@@ -4,5 +4,12 @@ import java.util.ArrayList;
 
 public class Maze {
 
-	private ArrayList<ArrayList<MBox>> maze ;
+	private ArrayList<ArrayList<MBox>> boxes ;
+	private int getLength(){
+		return boxes.size();
+	}
+	private int getWidth(){
+		return boxes.get(0).size();
+	}
+	
 }
