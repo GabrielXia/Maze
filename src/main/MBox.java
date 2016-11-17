@@ -2,25 +2,25 @@ package main;
 
 public class MBox {
 	
-	private int coordonneeLarge;
-	private int coordonneeHauteur;
+	private int widthCoordinate;
+	private int lengthCoordinate;
 	
-	public MBox(int coordonneeLarge,int coordonneeHauteur){
-		this.coordonneeLarge = coordonneeLarge;
-		this.coordonneeHauteur = coordonneeHauteur;
+	public MBox(int lengthCoordinate,int widthCoordinate){
+		this.lengthCoordinate = lengthCoordinate;
+		this.widthCoordinate = widthCoordinate;
 	}
 	/**
 	 * @return the coordonneeLarge
 	 */
-	public int getCoordonneeLarge() {
-		return coordonneeLarge;
+	public int getLengthCoordinate() {
+		return lengthCoordinate;
 	}
 	/**
 	 * @return the coordonneeHauteur
 	 */
 	
-	public int getCoordonneeHauteur() {
-		return coordonneeHauteur;
+	public int getWidthCoordinate() {
+		return widthCoordinate;
 	}
 	
 	
