@@ -5,7 +5,7 @@ public class MBox {
 	private int coordonneeLarge;
 	private int coordonneeHauteur;
 	
-	public void Mbox(int coordonneeLarge,int coordonneeHauteur){
+	public MBox(int coordonneeLarge,int coordonneeHauteur){
 		this.coordonneeLarge = coordonneeLarge;
 		this.coordonneeHauteur = coordonneeHauteur;
 	}
