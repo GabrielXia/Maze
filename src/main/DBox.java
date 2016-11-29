@@ -2,8 +2,8 @@ package main;
 
 public class DBox extends MBox{
 	private Maze maze;
-	public DBox(int coordonneeLarge, int coordonneeHauteur, Maze maze) {
-		super(coordonneeLarge, coordonneeHauteur);
+	public DBox(int lengthCoordinate, int widthCoordinate, Maze maze) {
+		super(lengthCoordinate, widthCoordinate);
 		// TODO Auto-generated constructor stub
 		this.maze = maze;
 	}
