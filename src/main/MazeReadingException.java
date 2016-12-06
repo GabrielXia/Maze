@@ -9,6 +9,6 @@ public class MazeReadingException extends Exception {
 	 * @param message
 	 */
 	MazeReadingException(String name, int line, String message){
-		
+		super("MazeReadingException in file:"+name+"\nin line:"+line+"\nmessage:"+message);
 	}
 }
