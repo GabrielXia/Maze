@@ -1,6 +1,7 @@
 package main;
-
-public class MBox {
+import interfaces.*;
+public class MBox 
+	implements VertexInterface{
 	
 	private int widthCoordinate;
 	private int lengthCoordinate;
@@ -21,6 +22,11 @@ public class MBox {
 	
 	public int getWidthCoordinate() {
 		return widthCoordinate;
+	}
+	@Override
+	public void setDistanceTo(VertexInterface other, double distance) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

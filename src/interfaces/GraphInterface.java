@@ -3,36 +3,23 @@ package interfaces;
 import java.util.List;
 
 public interface GraphInterface {
-	/**
-	 * set root of the graph
-	 * @param vertex
-	 */
-	public void setRoot(VertexInterface vertex);
-	/**
-	 * return root of the graph
-	 * @return
-	 */
-	public VertexInterface getRoot();
 	
 	/**
-	 * add new vertex to graph
-	 * @param vertex
-	 */
-	public void addVertex(VertexInterface vertex);
-	/**
-	 * return all vertex in the graph
+	 * returns all vertices
 	 * @return
 	 */
-	public List<VertexInterface> getAllVertex();
+	public List<VertexInterface> getAllVertices();
+	
+	
 	/**
-	 * return the number of vertex in graph
+	 * return the successors of vertex in graph
 	 * @return
 	 */
-	public int getNumberOfVertex();
+	public List<VertexInterface> getSuccessors(VertexInterface vertex);
+	
 	/**
-	 * return the list of the successors of  vertex
-	 * @param vertex
-	 * @return
+	 * return the weight of the path between src and dst
+	 * 
 	 */
-	public List<VertexInterface> getSuccesor(VertexInterface vertex);
+	public int getWeight(VertexInterface src,VertexInterface dst) ;
 }
