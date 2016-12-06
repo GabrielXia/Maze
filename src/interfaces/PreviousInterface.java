@@ -1,17 +1,21 @@
 package interfaces;
+import java.util.ArrayList;
 
 public interface PreviousInterface {
+	
 	/**
 	 * set pere(son) = father
-	 * @param father
-	 * @param son
 	 */
 	public void setFatherTo(VertexInterface father,VertexInterface son);
+	
 	/**
 	 * return the father of son
-	 * @param son
-	 * @return
 	 */
 	public VertexInterface getFather(VertexInterface son);
+	
+	/**
+	 * return the shortest way to vertex
+	 */
+	public ArrayList<VertexInterface> getShortestPathTo(VertexInterface vertex);
 	
 }
