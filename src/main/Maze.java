@@ -81,9 +81,9 @@ public class Maze
 				if(box instanceof ABox)out.write('A');
 				if(box instanceof DBox)out.write('D');
 			}
-			out.write('1');
 			out.write('\n');
 		}
+		out.close();
 	}
 
 
