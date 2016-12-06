@@ -8,7 +8,7 @@ public class MainTest {
 		// TODO Auto-generated method stub
 		Maze maze= new Maze("data/labyrinthe.txt");
 		maze.initFromTextFile("data/labyrinthe.txt");
-		maze.saveToTextFile("data/labyrinthe3.txt");
+		maze.saveToTextFile("data/labyrinthe3");
 		
 	}
 

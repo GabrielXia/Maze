@@ -6,8 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+
 import interfaces.*;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Maze 
 	implements GraphInterface
@@ -84,8 +87,6 @@ public class Maze
 	}
 
 
-	private ArrayList<ArrayList<MBox>> boxes ;
-	
 	
 	public ArrayList<VertexInterface> getAllVertices(){
 		ArrayList<VertexInterface> vertices = new ArrayList<VertexInterface>();
