@@ -1,5 +1,7 @@
-package interfaces;
+package dijkstra;
 import java.util.ArrayList;
+
+import interfaces.VertexInterface;
 
 public interface PreviousInterface {
 	

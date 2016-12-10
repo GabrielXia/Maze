@@ -1,15 +1,20 @@
-package main;
+package dijkstra;
 
 import interfaces.*;
 
 public class Dijkstra {
-	public PreviousInterface dijkstra(GraphInterface g,VertexInterface r,ASetInterface a,PiInterface pi,PreviousInterface previous){
+	private static PreviousInterface previous;
+	private static ASetInterface a ;
+	private static PiInterface pi;
+	
+	public static PreviousInterface dijkstra(GraphInterface g,VertexInterface r){
+		previous = new Previous(r);
 		a.add(r);
 		VertexInterface pivot = r;
 		pi.setDistanceMinimal(r, 0);
 		
 		for(VertexInterface i:g.getAllVertices()){
-			if(!i.equals(r)) pi.setDistanceMinimal(i, Double.POSITIVE_INFINITY);
+			if(!i.equals(r)) pi.setDistanceMinimal(i, Integer.MAX_VALUE);
 		}
 		
 		for(VertexInterface j:g.getAllVertices()){
@@ -22,7 +27,7 @@ public class Dijkstra {
 			}
 			
 			//find y not in A that pi(y) is minimal
-			double minimal = Double.POSITIVE_INFINITY;
+			Integer minimal = Integer.MAX_VALUE;
 			VertexInterface y = null;
 			for(VertexInterface i:g.getAllVertices()){
 				if(a.contains(i))continue;
@@ -35,9 +40,7 @@ public class Dijkstra {
 			
 			pivot = y;
 			a.add(pivot);
-
-			
-		}
+			}
 		
 		
 		return previous;
