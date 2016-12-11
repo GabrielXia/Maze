@@ -3,12 +3,12 @@ package dijkstra;
 import interfaces.*;
 
 public class Dijkstra {
-	private static PreviousInterface previous;
-	private static ASetInterface a ;
-	private static PiInterface pi;
 	
 	public static PreviousInterface dijkstra(GraphInterface g,VertexInterface r){
-		previous = new Previous(r);
+		PreviousInterface previous = new Previous(r);
+		ASetInterface a = new ASet();
+		PiInterface pi = new Pi();
+		
 		a.add(r);
 		VertexInterface pivot = r;
 		pi.setDistanceMinimal(r, 0);
@@ -17,11 +17,11 @@ public class Dijkstra {
 			if(!i.equals(r)) pi.setDistanceMinimal(i, Integer.MAX_VALUE);
 		}
 		
-		for(VertexInterface j:g.getAllVertices()){
+		for(int j=1;j<=g.getAllVertices().size()-1;j++){
 			for(VertexInterface y:g.getSuccessors(pivot)){
 				if(a.contains(y))continue;
-				if(pi.getDistanceMinimal(pivot)+pi.getDistanceMinimal(y)<pi.getDistanceMinimal(y)){
-					pi.setDistanceMinimal(y, pi.getDistanceMinimal(pivot)+pi.getDistanceMinimal(y));
+				if(pi.getDistanceMinimal(pivot)+g.getWeight(pivot, y)<pi.getDistanceMinimal(y)){
+					pi.setDistanceMinimal(y, pi.getDistanceMinimal(pivot)+g.getWeight(pivot, y));
 					previous.setFatherTo(pivot,y);
 				}
 			}

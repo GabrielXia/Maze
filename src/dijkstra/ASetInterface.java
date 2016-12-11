@@ -1,7 +1,5 @@
 package dijkstra;
 
-import interfaces.VertexInterface;
-
 public interface ASetInterface {
 	/**
 	 * add vertex in ASet

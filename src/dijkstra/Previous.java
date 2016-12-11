@@ -3,8 +3,6 @@ package dijkstra;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import interfaces.VertexInterface;
-
 public class Previous extends Hashtable<VertexInterface,VertexInterface> implements PreviousInterface {
 	private VertexInterface start;
 	public Previous(VertexInterface start){

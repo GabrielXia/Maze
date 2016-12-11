@@ -1,14 +1,16 @@
 package maze;
+import dijkstra.VertexInterface;
 import interfaces.*;
-public class MBox 
+public abstract class MBox 
 	implements VertexInterface{
-	
+	private Maze maze;
 	private int widthCoordinate;
 	private int lengthCoordinate;
 	
-	public MBox(int lengthCoordinate,int widthCoordinate){
+	public MBox(int lengthCoordinate,int widthCoordinate,Maze maze){
 		this.lengthCoordinate = lengthCoordinate;
 		this.widthCoordinate = widthCoordinate;
+		this.maze =maze;
 	}
 	/**
 	 * @return the coordonneeLarge
@@ -23,10 +25,9 @@ public class MBox
 	public int getWidthCoordinate() {
 		return widthCoordinate;
 	}
-	@Override
-	public void setDistanceTo(VertexInterface other, double distance) {
-		// TODO Auto-generated method stub
-		
+
+	public void setDistanceTo(VertexInterface other, Integer distance) {
+	
 	}
 	
 	

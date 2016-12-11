@@ -2,8 +2,6 @@ package dijkstra;
 
 import java.util.Hashtable;
 
-import interfaces.VertexInterface;
-
 public class Pi extends Hashtable<VertexInterface,Integer> implements PiInterface{
 
 	public void setDistanceMinimal(VertexInterface vertex, Integer distance) {

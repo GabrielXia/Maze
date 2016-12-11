@@ -1,7 +1,5 @@
 package dijkstra;
 
-import interfaces.VertexInterface;
-
 public interface PiInterface {
 	/**
 	 * set value of pi(vertex)
