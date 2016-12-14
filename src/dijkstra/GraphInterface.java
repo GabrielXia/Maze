@@ -1,4 +1,4 @@
-package interfaces;
+package dijkstra;
 
 import java.util.List;
 
@@ -22,4 +22,11 @@ public interface GraphInterface {
 	 * 
 	 */
 	public int getWeight(VertexInterface src,VertexInterface dst) ;
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public VertexInterface getStartVertex();
+	
 }
