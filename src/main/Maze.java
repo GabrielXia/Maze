@@ -24,11 +24,11 @@ public class Maze
 	 * @throws IOException 
 	 */
 	public final void initFromTextFile(String fileName) throws IOException{
-		BufferedReader in
-		   = new BufferedReader(new FileReader(fileName));
+		BufferedReader in = new BufferedReader(new FileReader(fileName));
 		
 		PrintStream out = System.out;
 		for(int i=0;i<10;i++)out.println(in.readLine());
+		in.close();
 	}
 	
 	public Maze(String fileName) throws MazeReadingException, IOException{
@@ -65,6 +65,7 @@ public class Maze
 				throw new MazeReadingException(fileName,line,"This box type is invalid");
 			}
 		}
+		in.close();
 	}
 	
 	/**
