@@ -1,4 +1,4 @@
-package interfaces;
+package dijkstra;
 
 public interface PiInterface {
 	/**
@@ -6,12 +6,12 @@ public interface PiInterface {
 	 * @param vertex
 	 * @param distance
 	 */
-	public void setDistanceMinimal(VertexInterface vertex, double distance);
+	public void setDistanceMinimal(VertexInterface vertex, Integer distance);
 	/**
 	 * get value of pi(vertex)
 	 * @param vertex
 	 * @return
 	 */
-	public double getDistanceMinimal(VertexInterface vertex);
+	public Integer getDistanceMinimal(VertexInterface vertex);
 	
 }

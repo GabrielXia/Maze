@@ -1,4 +1,4 @@
-package main;
+package maze;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,11 +12,16 @@ import interfaces.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import dijkstra.GraphInterface;
+import dijkstra.VertexInterface;
+
 public class Maze 
 	implements GraphInterface
 {
 
 	private ArrayList<ArrayList<MBox>> boxes ;
+	private DBox startVertex;
+	private ABox endVertex;
 	
 	/**
 	 * 
@@ -41,11 +46,13 @@ public class Maze
 			if(line==9&&colone==10)break;
 			switch(in.read()){
 			case('A'):
-				boxes.get(line).add(new ABox(line,colone,this));
+				endVertex = new ABox(line,colone,this);
+				boxes.get(line).add(startVertex);
 				colone++;
 				break;
 			case('D'):
-				boxes.get(line).add(new DBox(line,colone,this));
+				startVertex = new DBox(line,colone,this);
+				boxes.get(line).add(startVertex); 
 				colone++;
 				break;
 			case('E'):
@@ -77,10 +84,10 @@ public class Maze
 		PrintWriter out =new PrintWriter(fileName);
 		for(ArrayList<MBox> line :boxes){
 			for(MBox box:line){
-				if(box instanceof EBox)out.write('E');
-				if(box instanceof WBox)out.write('W');
-				if(box instanceof ABox)out.write('A');
-				if(box instanceof DBox)out.write('D');
+				if(box.getLabel().equals("E"))out.write('E');
+				if(box.getLabel().equals("W"))out.write('W');
+				if(box.getLabel().equals("A"))out.write('A');
+				if(box.getLabel().equals("D"))out.write('D');
 			}
 			out.write('\n');
 		}
@@ -104,14 +111,15 @@ public class Maze
 	public List<VertexInterface> getSuccessors(VertexInterface vertex){
 		ArrayList<VertexInterface> successors = new ArrayList<VertexInterface>();
 		MBox box = (MBox)vertex ;
+		System.out.println(box.getLabel());
 		int x=box.getLengthCoordinate();
 		int y=box.getWidthCoordinate();
 		int X=boxes.get(0).size();
 		int Y=boxes.size();
-		if (x>0 && !(boxes.get(y).get(x-1) instanceof WBox)) successors.add(boxes.get(y).get(x-1));
-		if (y>0 && !(boxes.get(y-1).get(x) instanceof WBox)) successors.add(boxes.get(y-1).get(x));
-		if (X>x+1 && !(boxes.get(y).get(x+1) instanceof WBox)) successors.add(boxes.get(y).get(x+1));
-		if (Y>y+1 && !(boxes.get(y+1).get(x) instanceof WBox)) successors.add(boxes.get(y+1).get(x));
+		if (x>0 && !(boxes.get(y).get(x-1).getLabel().equals("W"))) successors.add(boxes.get(y).get(x-1));
+		if (y>0 && !(boxes.get(y-1).get(x).getLabel().equals("W"))) successors.add(boxes.get(y-1).get(x));
+		if (X>x+1 && !(boxes.get(y).get(x+1).getLabel().equals("W"))) successors.add(boxes.get(y).get(x+1));
+		if (Y>y+1 && !(boxes.get(y+1).get(x).getLabel().equals("W"))) successors.add(boxes.get(y+1).get(x));
 		return successors;
 	}
 	
@@ -156,6 +164,14 @@ public class Maze
 			}
 		}
 		return result;
+	}
+
+
+	public VertexInterface getStartVertex() {
+		return startVertex;
+	}
+	public VertexInterface getEndVertex(){
+		return endVertex;
 	}
 	
 	
