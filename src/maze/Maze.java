@@ -47,7 +47,7 @@ public class Maze
 			switch(in.read()){
 			case('A'):
 				endVertex = new ABox(line,colone,this);
-				boxes.get(line).add(startVertex);
+				boxes.get(line).add(endVertex);
 				colone++;
 				break;
 			case('D'):

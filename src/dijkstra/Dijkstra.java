@@ -37,10 +37,10 @@ public class Dijkstra {
 				}
 				
 			}
-			
+			if(y==null)return previous;//all points are in Aset, finish
 			pivot = y;
 			a.add(pivot);
-			}
+		}
 		
 		
 		return previous;
