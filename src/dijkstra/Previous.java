@@ -9,8 +9,8 @@ public class Previous extends Hashtable<VertexInterface,VertexInterface> impleme
 		this.start = start;
 	}
 	
-	public void setFatherTo(VertexInterface father, VertexInterface son) {
-		this.put(son, father);
+	public void setFatherTo(VertexInterface son, VertexInterface father) {
+		this.put(son,father );
 	}
 
 	public VertexInterface getFather(VertexInterface son) {
@@ -19,9 +19,9 @@ public class Previous extends Hashtable<VertexInterface,VertexInterface> impleme
 
 	public ArrayList<VertexInterface> getShortestPathTo(VertexInterface vertex) {
 		ArrayList<VertexInterface> shortestPath = new ArrayList<VertexInterface>();
-		VertexInterface i = start;
-		shortestPath.add(start);
-		while(!i.equals(vertex)){
+		VertexInterface i = vertex;
+		shortestPath.add(vertex);
+		while(!i.equals(start)){
 			shortestPath.add(this.get(i));
 			i = this.get(i);
 		}

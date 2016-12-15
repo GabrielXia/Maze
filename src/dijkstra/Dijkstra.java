@@ -22,7 +22,7 @@ public class Dijkstra {
 				if(a.contains(y))continue;
 				if(pi.getDistanceMinimal(pivot)+g.getWeight(pivot, y)<pi.getDistanceMinimal(y)){
 					pi.setDistanceMinimal(y, pi.getDistanceMinimal(pivot)+g.getWeight(pivot, y));
-					previous.setFatherTo(pivot,y);
+					previous.setFatherTo(y,pivot);
 				}
 			}
 			
