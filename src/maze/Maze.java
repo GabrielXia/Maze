@@ -47,7 +47,7 @@ public class Maze
 			switch(in.read()){
 			case('A'):
 				endVertex = new ABox(line,colone,this);
-				boxes.get(line).add(startVertex);
+				boxes.get(line).add(endVertex);
 				colone++;
 				break;
 			case('D'):
@@ -111,15 +111,14 @@ public class Maze
 	public List<VertexInterface> getSuccessors(VertexInterface vertex){
 		ArrayList<VertexInterface> successors = new ArrayList<VertexInterface>();
 		MBox box = (MBox)vertex ;
-		System.out.println(box.getLabel());
 		int x=box.getLengthCoordinate();
 		int y=box.getWidthCoordinate();
-		int X=boxes.get(0).size();
-		int Y=boxes.size();
-		if (x>0 && !(boxes.get(y).get(x-1).getLabel().equals("W"))) successors.add(boxes.get(y).get(x-1));
-		if (y>0 && !(boxes.get(y-1).get(x).getLabel().equals("W"))) successors.add(boxes.get(y-1).get(x));
-		if (X>x+1 && !(boxes.get(y).get(x+1).getLabel().equals("W"))) successors.add(boxes.get(y).get(x+1));
-		if (Y>y+1 && !(boxes.get(y+1).get(x).getLabel().equals("W"))) successors.add(boxes.get(y+1).get(x));
+		int X=boxes.size();
+		int Y=boxes.get(0).size();
+		if (x>0 && !(boxes.get(x-1).get(y).getLabel().equals("W"))) successors.add(boxes.get(x-1).get(y));
+		if (y>0 && !(boxes.get(x).get(y-1).getLabel().equals("W"))) successors.add(boxes.get(x).get(y-1));
+		if (X>x+1 && !(boxes.get(x+1).get(y).getLabel().equals("W"))) successors.add(boxes.get(x+1).get(y));
+		if (Y>y+1 && !(boxes.get(x).get(y+1).getLabel().equals("W"))) successors.add(boxes.get(x).get(y+1));
 		return successors;
 	}
 	

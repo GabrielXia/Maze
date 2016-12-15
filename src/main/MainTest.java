@@ -17,7 +17,7 @@ public class MainTest {
 		Maze maze= new Maze("data/labyrinthe.txt");
 		PreviousInterface previous = Dijkstra.dijkstra(maze,maze.getStartVertex());
 		ArrayList<VertexInterface> shortestPathTo = previous.getShortestPathTo(maze.getEndVertex());
-
+		System.out.println(shortestPathTo.size());
 		
 	}
 
