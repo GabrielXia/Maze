@@ -3,3 +3,6 @@
 /.settings/
 /bin/
 /.metadata/
+/.idea/
+*.iml
+/out/
