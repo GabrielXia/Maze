@@ -7,9 +7,11 @@ import interfaces.GameModel;
 import interfaces.GameThread;
 import maze.DBox;
 import maze.Maze;
+import maze.MazeReadingException;
 import maze.WBox;
 
 import java.awt.event.*;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -19,7 +21,6 @@ import java.util.ArrayList;
 public class MazeController extends GameController {
     public static void main(String[] args){new MazeController("Maze",maze.Maze.WIDTH,maze.Maze.HEIGHT,10,10) ;}
     private final boolean debug = true ;
-    private boolean ifShiftPressed = false;
     private int shiftClickTime = 0;
 
     private final GameModel gameModel ;
@@ -32,9 +33,7 @@ public class MazeController extends GameController {
     private final GameThread gameThread ;
 
     private maze.Maze labyrinth;
-    private maze.ABox aBox;
-    private maze.DBox dBox;
-    private ArrayList<maze.WBox> wBox = new ArrayList<WBox>();
+    ArrayList<VertexInterface> path;
 
     public MazeController(String name, int gameWidth, int gameHeight, int blockWidth, int blockHeight)
     {
@@ -46,49 +45,69 @@ public class MazeController extends GameController {
         this.blockHeight = blockHeight ;
 
         this.gameModel   = new GameModel(gameWidth,gameHeight,blockWidth,blockHeight) ;
+        gameModel.fillRectangle(0,0,gameWidth,gameHeight,GameModel.white);
+        notify(gameModel);
 
         gameThread = new GameThread(this,"tictac") ;
         gameThread.start() ;
+
+        labyrinth = new Maze();
+
     }
 
+    public void drawFromMaze(){
+        gameModel.fillRectangle(0,0,gameWidth,gameHeight,GameModel.white);
+        gameModel.set( ((maze.MBox)labyrinth.getStartVertex()).getWidthCoordinate(), ((maze.MBox)labyrinth.getStartVertex()).getLengthCoordinate(),GameModel.red);
+        gameModel.set( ((maze.MBox)labyrinth.getEndVertex()).getWidthCoordinate(), ((maze.MBox)labyrinth.getEndVertex()).getLengthCoordinate(),GameModel.blue);
+        for(WBox i:labyrinth.getWBox()){
+            gameModel.set( i.getWidthCoordinate(), i.getLengthCoordinate(),GameModel.black);
+        }
+        if(labyrinth.ifContainsStartVertex()&&labyrinth.ifContainsEndVertex()){
+            path = dijkstra.Dijkstra.dijkstra(labyrinth,labyrinth.getStartVertex()).getShortestPathTo(labyrinth.getEndVertex());
+            for(VertexInterface i :path){
+                maze.MBox m = (maze.MBox) i;
+                if(m.equals(labyrinth.getStartVertex()) || m.equals(labyrinth.getEndVertex()))continue;
+                gameModel.set(m.getWidthCoordinate(),m.getLengthCoordinate(),GameModel.yellow);
+                notify(gameModel);
+            }
+        }
+        notify(gameModel);
+    }
     public final synchronized void tictac()
     {
-        if (debug)
-            System.err.println("Thread calls tictac()") ;
+        if (debug){
+            System.err.println("lala");
+        }
     }
 
     /** Invoked when the mouse button has been clicked (pressed and released) on a component. */
     @Override
     public final synchronized void mouseClicked(MouseEvent e) {
         if (debug) {
-            if (ifShiftPressed == false) {
+            if (!e.isShiftDown()) {
                 System.err.println("Mouse clicked");
-                wBox.add(new WBox(this.getGameY(e), this.getGameX(e), labyrinth));
+                labyrinth.addWBox(new WBox(this.getGameY(e), this.getGameX(e), labyrinth));
                 gameModel.set(this.getGameX(e), this.getGameY(e), GameModel.black);
                 notify(gameModel);//refresh
             } else {
-                if(shiftClickTime==0){
-                    dBox = new DBox(getGameY(e),getGameX(e),labyrinth);
+                if (shiftClickTime == 0) {
+                    labyrinth.addDBox(new DBox(getGameY(e), getGameX(e), labyrinth));
                     gameModel.set(getGameX(e), getGameY(e), gameModel.red);
                     notify(gameModel);
                     shiftClickTime++;
-                }
-                else {
-                    aBox = new maze.ABox(getGameY(e),getGameX(e),labyrinth);
-                    gameModel.set(getGameX(e),getGameY(e),gameModel.blue);
+                } else if (shiftClickTime == 1) {
+                    labyrinth.addABox(new maze.ABox(getGameY(e), getGameX(e), labyrinth));
+                    gameModel.set(getGameX(e), getGameY(e), gameModel.blue);
                     notify(gameModel);
-                    labyrinth = new Maze(wBox,dBox,aBox);
-                    PreviousInterface previous = dijkstra.Dijkstra.dijkstra(labyrinth,dBox);
-                    ArrayList<VertexInterface> path = previous.getShortestPathTo(aBox);
-                    for(VertexInterface i :path){
-                        maze.MBox m = (maze.MBox) i;
-                        if(m.equals(dBox) || m.equals(aBox))continue;
-                        gameModel.set(m.getWidthCoordinate(),m.getLengthCoordinate(),GameModel.yellow);
-                        notify(gameModel);
-                    }
-
                 }
             }
+            if(labyrinth.ifContainsStartVertex()&&labyrinth.ifContainsEndVertex()){
+                drawFromMaze();
+                }
+
+
+
+
         }
     }
 
@@ -164,6 +183,7 @@ public class MazeController extends GameController {
     {
         if (debug)
             System.err.println("Key typed: " + e.paramString()) ;
+
     }
 
     /** Invoked when a key has been pressed.
@@ -173,9 +193,28 @@ public class MazeController extends GameController {
     public final synchronized void keyPressed(KeyEvent e)
     {
         if (debug) {
-            System.err.println("Key pressed: " + e.getKeyCode());
-            if (e.getKeyCode() == 16) //press shift
-                ifShiftPressed = true;
+            System.err.println("Key pressed: " + e.getModifiers());
+
+
+            //Ctrl + s to save
+            if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_S) {
+                try {
+                    labyrinth.saveToTextFile("data/labyrinthe.txt");
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+            }
+
+            if(e.isControlDown() && e.getKeyCode()==KeyEvent.VK_O){
+                try {
+                    labyrinth.initFromTextFile("data/labyrinthe.txt");
+                    drawFromMaze();
+                } catch (IOException exception ) {
+                    exception.printStackTrace();
+                } catch (MazeReadingException exception){
+                    exception.printStackTrace();
+                }
+            }
         }
     }
 
@@ -187,7 +226,6 @@ public class MazeController extends GameController {
     {
         if (debug) {
             System.err.println("Key released: " + e.paramString());
-            if (e.getKeyCode() == 16) ifShiftPressed = false;
         }
     }
 

@@ -15,5 +15,7 @@ public final class FileMenu extends JMenu
 	{
 		super("File") ;
 		add(new QuitMenuItem(gameFrame)) ;
+		add(new SaveMenuItem(gameFrame)) ;
+
 	}
 }

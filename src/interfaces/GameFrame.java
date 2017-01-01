@@ -78,4 +78,8 @@ public final class GameFrame extends JFrame
 		   }		
 	}
 
+	public final void save(){
+
+	}
+
 }

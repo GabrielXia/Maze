@@ -27,5 +27,5 @@ public class Previous extends Hashtable<VertexInterface,VertexInterface> impleme
 		}
 		return shortestPath;
 	}
-
+	//public ArrayList<VertexInterface> getShortestPathTo()
 }

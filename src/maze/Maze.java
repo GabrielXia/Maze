@@ -22,19 +22,53 @@ public class Maze
 	private ArrayList<ArrayList<MBox>> boxes ;
 	private DBox startVertex;
 	private ABox endVertex;
-	public final static int WIDTH = 10;
-	public final static int  HEIGHT =10;
+	private ArrayList<WBox> wBox;
+	public final static int WIDTH = 50;
+	public final static int  HEIGHT =20;
 	
 	/**
 	 * 
 	 * @param fileName
 	 * @throws IOException 
 	 */
-	public final void initFromTextFile(String fileName) throws IOException{
-		BufferedReader in = new BufferedReader(new FileReader(fileName));
-		
-		PrintStream out = System.out;
-		for(int i=0;i<HEIGHT;i++)out.println(in.readLine());
+	public final void initFromTextFile(String fileName) throws MazeReadingException,IOException{
+		BufferedReader in
+				= new BufferedReader(new FileReader(fileName));
+		boxes = new ArrayList<ArrayList<MBox>>();
+		wBox = new ArrayList<WBox>();
+		boxes.add(new ArrayList<MBox>() );
+		int line = 0, colone = 0;
+		while(line<HEIGHT){
+			if(line==HEIGHT-1&&colone==WIDTH)break;
+			switch(in.read()){
+				case('A'):
+					endVertex = new ABox(line,colone,this);
+					boxes.get(line).add(endVertex);
+					colone++;
+					break;
+				case('D'):
+					startVertex = new DBox(line,colone,this);
+					boxes.get(line).add(startVertex);
+					colone++;
+					break;
+				case('E'):
+					boxes.get(line).add(new EBox(line,colone,this));
+					colone++;
+					break;
+				case('W'):
+					wBox.add(new WBox(line,colone,this));
+					boxes.get(line).add(wBox.get(wBox.size()-1));
+					colone++;
+					break;
+				case('\n'):
+					boxes.add(new ArrayList<MBox>());
+					line++;
+					colone=0;
+					break;
+				default:
+					throw new MazeReadingException(fileName,line,"This box type is invalid");
+			}
+		}
 		in.close();
 	}
 	
@@ -42,6 +76,7 @@ public class Maze
 		BufferedReader in
 		   = new BufferedReader(new FileReader(fileName));
 		boxes = new ArrayList<ArrayList<MBox>>();
+		wBox = new ArrayList<WBox>();
 		boxes.add(new ArrayList<MBox>() );
 		int line = 0, colone = 0;
 		while(line<HEIGHT){
@@ -62,7 +97,8 @@ public class Maze
 				colone++;
 				break;
 			case('W'):
-				boxes.get(line).add(new WBox(line,colone,this));
+				wBox.add(new WBox(line,colone,this));
+				boxes.get(line).add(wBox.get(colone));
 				colone++;
 				break;
 			case('\n'):
@@ -91,6 +127,34 @@ public class Maze
 			boxes.get(i.getLengthCoordinate()).set(i.getWidthCoordinate(),i);
 		}
 	}
+
+	public Maze(){
+		boxes = new ArrayList<ArrayList<MBox>>();
+		wBox = new ArrayList<WBox>();
+		for(int line =0; line < HEIGHT;line++){
+			boxes.add(new ArrayList<MBox>());
+			for(int colone=0; colone <WIDTH; colone++){
+				boxes.get(line).add(new EBox(line,colone,this));
+			}
+		}
+
+	}
+
+	public void addABox(ABox aBox){
+		boxes.get(aBox.getLengthCoordinate()).set(aBox.getWidthCoordinate(),aBox);
+		endVertex = aBox;
+	}
+
+	public void addDBox(DBox dBox){
+		boxes.get(dBox.getLengthCoordinate()).set(dBox.getWidthCoordinate(),dBox);
+		startVertex = dBox;
+	}
+
+	public void addWBox(WBox wBox){
+		boxes.get(wBox.getLengthCoordinate()).set(wBox.getWidthCoordinate(),wBox);
+		this.wBox.add(wBox);
+	}
+
 
 	/**
 	 * 
@@ -188,6 +252,33 @@ public class Maze
 	}
 	public VertexInterface getEndVertex(){
 		return endVertex;
+	}
+	public ArrayList<WBox> getWBox(){return wBox; }
+
+	public boolean ifContainsStartVertex(){
+		if(startVertex==null) return false;
+		else{
+			if(boxes.get(startVertex.getLengthCoordinate()).get(startVertex.getWidthCoordinate()).getLabel().equals("D")){
+				return true;
+			}
+			else{
+				startVertex =null;
+				return false;
+			}
+		}
+	}
+
+	public boolean ifContainsEndVertex(){
+		if(endVertex==null) return false;
+		else{
+			if(boxes.get(endVertex.getLengthCoordinate()).get(endVertex.getWidthCoordinate()).getLabel().equals("A")){
+				return true;
+			}
+			else{
+				endVertex =null;
+				return false;
+			}
+		}
 	}
 	
 	
