@@ -22,6 +22,8 @@ public class Maze
 	private ArrayList<ArrayList<MBox>> boxes ;
 	private DBox startVertex;
 	private ABox endVertex;
+	public final static int WIDTH = 10;
+	public final static int  HEIGHT =10;
 	
 	/**
 	 * 
@@ -32,7 +34,7 @@ public class Maze
 		BufferedReader in = new BufferedReader(new FileReader(fileName));
 		
 		PrintStream out = System.out;
-		for(int i=0;i<10;i++)out.println(in.readLine());
+		for(int i=0;i<HEIGHT;i++)out.println(in.readLine());
 		in.close();
 	}
 	
@@ -42,8 +44,8 @@ public class Maze
 		boxes = new ArrayList<ArrayList<MBox>>();
 		boxes.add(new ArrayList<MBox>() );
 		int line = 0, colone = 0;
-		while(line<10){
-			if(line==9&&colone==10)break;
+		while(line<HEIGHT){
+			if(line==HEIGHT-1&&colone==WIDTH)break;
 			switch(in.read()){
 			case('A'):
 				endVertex = new ABox(line,colone,this);
@@ -74,7 +76,22 @@ public class Maze
 		}
 		in.close();
 	}
-	
+
+	public Maze(List<WBox> wBox, DBox dBox,ABox aBox) {
+		boxes = new ArrayList<ArrayList<MBox>>();
+		for(int line =0; line < HEIGHT;line++){
+			boxes.add(new ArrayList<MBox>());
+			for(int colone=0; colone <WIDTH; colone++){
+				boxes.get(line).add(new EBox(line,colone,this));
+			}
+		}
+		boxes.get(dBox.getLengthCoordinate()).set(dBox.getWidthCoordinate(),dBox);
+		boxes.get(aBox.getLengthCoordinate()).set(aBox.getWidthCoordinate(),aBox);
+		for( WBox i : wBox){
+			boxes.get(i.getLengthCoordinate()).set(i.getWidthCoordinate(),i);
+		}
+	}
+
 	/**
 	 * 
 	 * @param fileName

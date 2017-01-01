@@ -1,5 +1,7 @@
 package interfaces;
 
+import main.GameController;
+
 import java.awt.* ;
 import javax.swing.* ;
 

@@ -1,4 +1,7 @@
-package interfaces;
+package main;
+
+import interfaces.GameFrame;
+import interfaces.GameModel;
 
 import java.awt.event.*;
 
