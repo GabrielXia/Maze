@@ -4,7 +4,7 @@ import interfaces.*;
 import java.awt.event.*;
 import java.util.* ;
 
-public class AleaGameController extends GameController
+public class AleaGameController extends FileMenu.GameController
 {
 	public static void main(String[] args) 
 	{

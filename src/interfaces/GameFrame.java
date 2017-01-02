@@ -1,6 +1,11 @@
 package interfaces;
 
+import main.MazeController;
+import maze.MazeReadingException;
+
 import java.awt.* ;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.* ;
 
@@ -12,7 +17,9 @@ public final class GameFrame extends JFrame
 	
 	/** The game panel, ie. the content of the window. */
 	private final GamePanel gamePanel ;
-	
+
+	/** The gameController is to communicate with controller*/
+	private final FileMenu.GameController gameController;
 	/** The constructor :
 	 * @param gameController The game controller.
 	 * @param name The game name to be displayed at the top of the window.
@@ -21,10 +28,10 @@ public final class GameFrame extends JFrame
 	 * @param blockWidth The width in pixel of a screen block.
 	 * @param blockHeight The height in pixel of a screen block.
 	 */
-	public GameFrame(GameController gameController, String name, int gameWidth, int gameHeight, int blockWidth, int blockHeight)
+	public GameFrame(FileMenu.GameController gameController, String name, int gameWidth, int gameHeight, int blockWidth, int blockHeight)
 	{
 		super(name) ;
-		
+		this.gameController = gameController;
 		// Widgets
 
 		setJMenuBar(new GameMenuBar(this)) ;
@@ -57,7 +64,26 @@ public final class GameFrame extends JFrame
 		gamePanel.set(gameModel);
 		repaint() ;
 	}
-	
+
+
+	public final void newMaze()
+	{
+		int response
+				= JOptionPane.showInternalOptionDialog(
+				gamePanel,
+				"New maze ?",
+				"New application",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE,
+				null,null,null) ;
+		switch (response) {
+			case JOptionPane.OK_OPTION:
+				((MazeController)gameController).newMaze();
+			case JOptionPane.NO_OPTION:
+				break ;
+		}
+	}
+
 	public final void quit()
 	{
 		   int response 
@@ -74,6 +100,39 @@ public final class GameFrame extends JFrame
 		   case JOptionPane.NO_OPTION:
 			   break ;
 		   }		
+	}
+
+	public final void save() throws FileNotFoundException{
+		int response
+				= JOptionPane.showInternalOptionDialog(
+						gamePanel,
+				"Really save ?",
+				"Save application",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE,
+				null,null,null) ;
+		switch (response) {
+			case JOptionPane.OK_OPTION:
+				((MazeController)gameController).saveMaze();
+			case JOptionPane.NO_OPTION:
+				break ;
+		}
+	}
+	public final void load() throws IOException, MazeReadingException{
+		int response
+				= JOptionPane.showInternalOptionDialog(
+				gamePanel,
+				"Really load ?",
+				"Load application",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE,
+				null,null,null) ;
+		switch (response) {
+			case JOptionPane.OK_OPTION:
+				((MazeController)gameController).loadMaze();
+			case JOptionPane.NO_OPTION:
+				break ;
+		}
 	}
 
 }
