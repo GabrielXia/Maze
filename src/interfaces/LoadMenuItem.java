@@ -1,14 +1,17 @@
 package interfaces;
 
+import maze.MazeReadingException;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
- * Created by XIAJin on 2017/1/1.
+ * Created by XIAJin on 2017/1/2.
  */
-public class SaveMenuItem extends JMenuItem implements ActionListener {
+public class LoadMenuItem extends JMenuItem implements ActionListener {
     static final long serialVersionUID = 201503101423L ;
 
     /** The current Java frame. */
@@ -17,9 +20,9 @@ public class SaveMenuItem extends JMenuItem implements ActionListener {
     /** Constructor:
      * @param gameWindow The current Java frame.
      */
-    public SaveMenuItem(GameFrame gameWindow)
+    public LoadMenuItem(GameFrame gameWindow)
     {
-        super("Save") ;
+        super("Load") ;
         this.gameWindow = gameWindow ;
         addActionListener(this) ;
     }
@@ -28,8 +31,10 @@ public class SaveMenuItem extends JMenuItem implements ActionListener {
     public final void actionPerformed(ActionEvent evt)
     {
         try {
-            gameWindow.save();
-        }catch (FileNotFoundException e){
+            gameWindow.load();
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (MazeReadingException e){
             e.printStackTrace();
         }
     }

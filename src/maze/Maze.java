@@ -23,8 +23,8 @@ public class Maze
 	private DBox startVertex;
 	private ABox endVertex;
 	private ArrayList<WBox> wBox;
-	public final static int WIDTH = 50;
-	public final static int  HEIGHT =20;
+	public int width;
+	public int height;
 	
 	/**
 	 * 
@@ -38,8 +38,8 @@ public class Maze
 		wBox = new ArrayList<WBox>();
 		boxes.add(new ArrayList<MBox>() );
 		int line = 0, colone = 0;
-		while(line<HEIGHT){
-			if(line==HEIGHT-1&&colone==WIDTH)break;
+		while(line<height){
+			if(line==height-1&&colone==width)break;
 			switch(in.read()){
 				case('A'):
 					endVertex = new ABox(line,colone,this);
@@ -79,8 +79,8 @@ public class Maze
 		wBox = new ArrayList<WBox>();
 		boxes.add(new ArrayList<MBox>() );
 		int line = 0, colone = 0;
-		while(line<HEIGHT){
-			if(line==HEIGHT-1&&colone==WIDTH)break;
+		while(line<height){
+			if(line==height-1&&colone==width)break;
 			switch(in.read()){
 			case('A'):
 				endVertex = new ABox(line,colone,this);
@@ -115,9 +115,9 @@ public class Maze
 
 	public Maze(List<WBox> wBox, DBox dBox,ABox aBox) {
 		boxes = new ArrayList<ArrayList<MBox>>();
-		for(int line =0; line < HEIGHT;line++){
+		for(int line =0; line < height;line++){
 			boxes.add(new ArrayList<MBox>());
-			for(int colone=0; colone <WIDTH; colone++){
+			for(int colone=0; colone <width; colone++){
 				boxes.get(line).add(new EBox(line,colone,this));
 			}
 		}
@@ -129,11 +129,14 @@ public class Maze
 	}
 
 	public Maze(){
+		DimensionPanel dimensionPanel = new DimensionPanel();
+		width = dimensionPanel.getWidth();
+		height = dimensionPanel.getLength();
 		boxes = new ArrayList<ArrayList<MBox>>();
 		wBox = new ArrayList<WBox>();
-		for(int line =0; line < HEIGHT;line++){
+		for(int line =0; line < height;line++){
 			boxes.add(new ArrayList<MBox>());
-			for(int colone=0; colone <WIDTH; colone++){
+			for(int colone=0; colone <width; colone++){
 				boxes.get(line).add(new EBox(line,colone,this));
 			}
 		}
@@ -212,12 +215,12 @@ public class Maze
 	}
 
 	
-	private int getLength(){
-		return boxes.get(0).size();
+	public int getHeight(){
+		return height;
 	}
 	
-	private int getWidth(){
-		return boxes.size();
+	public int getWidth(){
+		return width;
 	}
 	
 	
@@ -230,7 +233,7 @@ public class Maze
 		
 		int y=box.getWidthCoordinate();
 		
-		int X=this.getLength();
+		int X=this.getWidth();
 		
 		int Y=this.getWidth();
 		

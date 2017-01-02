@@ -1,7 +1,5 @@
 package interfaces;
 
-import main.GameController;
-
 import java.awt.* ;
 import javax.swing.* ;
 
@@ -21,7 +19,7 @@ public final class GamePanel extends JPanel
 	 * @param blockWidth The width in pixel of a screen block.
 	 * @param blockHeight The height in pixel of a screen block.
 	 */
-	public GamePanel(GameController gameController, int gameWidth, int gameHeight, int blockWidth, int blockHeight)
+	public GamePanel(FileMenu.GameController gameController, int gameWidth, int gameHeight, int blockWidth, int blockHeight)
 	{
 		super() ;
 		

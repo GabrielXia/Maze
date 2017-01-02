@@ -1,8 +1,8 @@
 package main;
 
-import dijkstra.Previous;
-import dijkstra.PreviousInterface;
 import dijkstra.VertexInterface;
+import interfaces.FileMenu;
+import interfaces.GameFrame;
 import interfaces.GameModel;
 import interfaces.GameThread;
 import maze.DBox;
@@ -11,22 +11,26 @@ import maze.MazeReadingException;
 import maze.WBox;
 
 import java.awt.event.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * Created by XIAJin on 2016/12/30.
  */
-public class MazeController extends GameController {
-    public static void main(String[] args){new MazeController("Maze",maze.Maze.WIDTH,maze.Maze.HEIGHT,10,10) ;}
+public class MazeController extends FileMenu.GameController {
+    public static void main(String[] args){
+        Maze labyrinth = new Maze();
+        new MazeController("Maze",labyrinth.getWidth(),labyrinth.getHeight(),30,30,labyrinth) ;
+    }
+
     private final boolean debug = true ;
     private int shiftClickTime = 0;
 
-    private final GameModel gameModel ;
+    private GameModel gameModel ;
 
-    private final int gameWidth ;
-    private final int gameHeight ;
+    private int gameWidth ;
+    private int gameHeight ;
     private final int blockWidth ;
     private final int blockHeight ;
 
@@ -35,7 +39,7 @@ public class MazeController extends GameController {
     private maze.Maze labyrinth;
     ArrayList<VertexInterface> path;
 
-    public MazeController(String name, int gameWidth, int gameHeight, int blockWidth, int blockHeight)
+    public MazeController(String name, int gameWidth, int gameHeight, int blockWidth, int blockHeight, Maze maze)
     {
         super(name,gameWidth,gameHeight,blockWidth,blockHeight) ;
 
@@ -43,6 +47,7 @@ public class MazeController extends GameController {
         this.gameHeight  = gameHeight ;
         this.blockWidth  = blockWidth ;
         this.blockHeight = blockHeight ;
+        this.labyrinth = maze;
 
         this.gameModel   = new GameModel(gameWidth,gameHeight,blockWidth,blockHeight) ;
         gameModel.fillRectangle(0,0,gameWidth,gameHeight,GameModel.white);
@@ -50,25 +55,59 @@ public class MazeController extends GameController {
 
         gameThread = new GameThread(this,"tictac") ;
         gameThread.start() ;
+    }
 
-        labyrinth = new Maze();
+    public void setGameWidth(int gameWidth) {
+        this.gameWidth = gameWidth;
+    }
 
+    public void setGameHeight(int gameHeight) {
+        this.gameHeight = gameHeight;
+    }
+
+    public void setLabyrinth(Maze labyrinth) {
+        this.labyrinth = labyrinth;
+    }
+
+    public void newMaze(){
+        this.labyrinth = new Maze();
+        this.setLabyrinth(labyrinth);
+        this.setGameHeight(labyrinth.getHeight());
+        this.setGameWidth(labyrinth.getWidth());
+        this.gameModel   = new GameModel(gameWidth,gameHeight,blockWidth,blockHeight) ;
+        this.disposeGameFrame();
+        this.setGameFrame(new GameFrame(this,"Maze",gameWidth,gameHeight,blockWidth,blockHeight) );
+        gameModel.fillRectangle(0,0,gameWidth,gameHeight,GameModel.white);
+        notify(gameModel);
+
+    }
+
+    public  void saveMaze() throws FileNotFoundException{
+        labyrinth.saveToTextFile("data/labyrinthe.txt");
+    }
+
+    public void loadMaze() throws IOException,MazeReadingException{
+        labyrinth.initFromTextFile("data/labyrinthe.txt");
+        drawFromMaze();
     }
 
     public void drawFromMaze(){
         gameModel.fillRectangle(0,0,gameWidth,gameHeight,GameModel.white);
+        if(labyrinth.ifContainsStartVertex())
         gameModel.set( ((maze.MBox)labyrinth.getStartVertex()).getWidthCoordinate(), ((maze.MBox)labyrinth.getStartVertex()).getLengthCoordinate(),GameModel.red);
+        if(labyrinth.ifContainsEndVertex())
         gameModel.set( ((maze.MBox)labyrinth.getEndVertex()).getWidthCoordinate(), ((maze.MBox)labyrinth.getEndVertex()).getLengthCoordinate(),GameModel.blue);
         for(WBox i:labyrinth.getWBox()){
             gameModel.set( i.getWidthCoordinate(), i.getLengthCoordinate(),GameModel.black);
         }
+        notify(gameModel);
         if(labyrinth.ifContainsStartVertex()&&labyrinth.ifContainsEndVertex()){
             path = dijkstra.Dijkstra.dijkstra(labyrinth,labyrinth.getStartVertex()).getShortestPathTo(labyrinth.getEndVertex());
             for(VertexInterface i :path){
                 maze.MBox m = (maze.MBox) i;
                 if(m.equals(labyrinth.getStartVertex()) || m.equals(labyrinth.getEndVertex()))continue;
                 gameModel.set(m.getWidthCoordinate(),m.getLengthCoordinate(),GameModel.yellow);
-                notify(gameModel);
+                //notify(gameModel);
             }
         }
         notify(gameModel);
@@ -87,23 +126,16 @@ public class MazeController extends GameController {
             if (!e.isShiftDown()) {
                 System.err.println("Mouse clicked");
                 labyrinth.addWBox(new WBox(this.getGameY(e), this.getGameX(e), labyrinth));
-                gameModel.set(this.getGameX(e), this.getGameY(e), GameModel.black);
-                notify(gameModel);//refresh
             } else {
                 if (shiftClickTime == 0) {
                     labyrinth.addDBox(new DBox(getGameY(e), getGameX(e), labyrinth));
-                    gameModel.set(getGameX(e), getGameY(e), gameModel.red);
-                    notify(gameModel);
                     shiftClickTime++;
                 } else if (shiftClickTime == 1) {
                     labyrinth.addABox(new maze.ABox(getGameY(e), getGameX(e), labyrinth));
-                    gameModel.set(getGameX(e), getGameY(e), gameModel.blue);
-                    notify(gameModel);
                 }
             }
-            if(labyrinth.ifContainsStartVertex()&&labyrinth.ifContainsEndVertex()){
-                drawFromMaze();
-                }
+
+            drawFromMaze();
 
 
 
@@ -199,21 +231,24 @@ public class MazeController extends GameController {
             //Ctrl + s to save
             if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_S) {
                 try {
-                    labyrinth.saveToTextFile("data/labyrinthe.txt");
+                    saveMaze();
                 } catch (IOException exception) {
                     exception.printStackTrace();
                 }
             }
 
-            if(e.isControlDown() && e.getKeyCode()==KeyEvent.VK_O){
+            if(e.isControlDown() && e.getKeyCode()==KeyEvent.VK_L){
                 try {
-                    labyrinth.initFromTextFile("data/labyrinthe.txt");
-                    drawFromMaze();
+                    loadMaze();
                 } catch (IOException exception ) {
                     exception.printStackTrace();
                 } catch (MazeReadingException exception){
                     exception.printStackTrace();
                 }
+            }
+
+            if(e.isControlDown() && e.getKeyCode()==KeyEvent.VK_N){
+                    newMaze();
             }
         }
     }
