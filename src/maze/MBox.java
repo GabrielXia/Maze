@@ -1,13 +1,11 @@
 package maze;
 import dijkstra.VertexInterface;
-import interfaces.*;
 public abstract class MBox 
 	implements VertexInterface{
 	
 	/**
 	 * The maze where belongs the box.
 	 */
-	private Maze maze;
 	
 	/**
 	 * The vertical coordinates of the box.
@@ -25,10 +23,9 @@ public abstract class MBox
 	 * @param widthCoordinate The vertical coordinate of the box.
 	 * @param maze The maze where belongs the box.
 	 */
-	public MBox(int lengthCoordinate,int widthCoordinate,Maze maze){
+	public MBox(int lengthCoordinate,int widthCoordinate){
 		this.lengthCoordinate = lengthCoordinate;
 		this.widthCoordinate = widthCoordinate;
-		this.maze =maze;
 	}
 	
 	

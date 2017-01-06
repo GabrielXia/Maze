@@ -1,16 +1,17 @@
 package dijkstra;
 
 public interface ASetInterface {
+	
 	/**
-	 * add vertex in ASet
-	 * @param vertex
+	 * Adds a vertex to this set.
+	 * @param vertex vertex which shall be added to this set
 	 */
 	public boolean add(VertexInterface vertex);
 	
 	/**
-	 * returns True if Aset contains the vertex and False otherwise
-	 * @param vertex
-	 * @return
+	 * Verify whether or not this set contains the vertex.
+	 * @param vertex vertex whose presence in this set is to be tested
+	 * @return a boolean equal to True if this set contains the vertex and False otherwise
 	 */
 	public boolean contains(Object vertex);
 	

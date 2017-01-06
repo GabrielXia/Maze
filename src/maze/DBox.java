@@ -7,8 +7,8 @@ public final class DBox extends MBox{
 	 * @param widthCoordinate The vertical coordinate of the box.
 	 * @param maze The maze where belongs the box.
 	 */
-	public DBox(int lengthCoordinate, int widthCoordinate, Maze maze) {
-		super(lengthCoordinate, widthCoordinate, maze);
+	public DBox(int lengthCoordinate, int widthCoordinate) {
+		super(lengthCoordinate, widthCoordinate);
 	}
 
 	
