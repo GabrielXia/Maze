@@ -8,7 +8,7 @@ public interface ASetInterface {
 	public boolean add(VertexInterface vertex);
 	
 	/**
-	 * returns True if Aset contains vertex and False otherwise
+	 * returns True if Aset contains the vertex and False otherwise
 	 * @param vertex
 	 * @return
 	 */

@@ -20,6 +20,7 @@ public final class GameFrame extends JFrame
 
 	/** The gameController is to communicate with controller*/
 	private final FileMenu.GameController gameController;
+
 	/** The constructor :
 	 * @param gameController The game controller.
 	 * @param name The game name to be displayed at the top of the window.
@@ -58,14 +59,20 @@ public final class GameFrame extends JFrame
 		
 		addKeyListener(gameController) ;
 	}
-	
+
+	/**
+	 * The setter
+	 * @param gameModel the game model
+	 */
 	public final void set(GameModel gameModel)
 	{
 		gamePanel.set(gameModel);
 		repaint() ;
 	}
 
-
+	/**
+	 * creat a new maze
+	 */
 	public final void newMaze()
 	{
 		int response
@@ -84,6 +91,9 @@ public final class GameFrame extends JFrame
 		}
 	}
 
+	/**
+	 * quit the game
+	 */
 	public final void quit()
 	{
 		   int response 
@@ -102,6 +112,10 @@ public final class GameFrame extends JFrame
 		   }		
 	}
 
+	/**
+	 * save maze to data.labyrinthe.txt
+	 * @throws FileNotFoundException
+	 */
 	public final void save() throws FileNotFoundException{
 		int response
 				= JOptionPane.showInternalOptionDialog(
@@ -118,6 +132,12 @@ public final class GameFrame extends JFrame
 				break ;
 		}
 	}
+
+	/**
+	 * load maze from data/labyrinthe.txt
+	 * @throws IOException
+	 * @throws MazeReadingException
+	 */
 	public final void load() throws IOException, MazeReadingException{
 		int response
 				= JOptionPane.showInternalOptionDialog(
