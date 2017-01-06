@@ -42,7 +42,7 @@ public class MazeController extends FileMenu.GameController {
     /** The width of each block*/
     private final int blockWidth ;
 
-    /** The height of each blaock*/
+    /** The height of each block*/
     private final int blockHeight ;
 
     /** The game thread*/
@@ -154,11 +154,13 @@ public class MazeController extends FileMenu.GameController {
         notify(gameModel);
         if(labyrinth.ifContainsStartVertex()&&labyrinth.ifContainsEndVertex()){
             path = dijkstra.Dijkstra.dijkstra(labyrinth,labyrinth.getStartVertex()).getShortestPathTo(labyrinth.getEndVertex());
-            for(VertexInterface i :path){
-                maze.MBox m = (maze.MBox) i;
-                if(m.equals(labyrinth.getStartVertex()) || m.equals(labyrinth.getEndVertex()))continue;
-                gameModel.set(m.getWidthCoordinate(),m.getLengthCoordinate(),GameModel.yellow);
-                //notify(gameModel);
+            if (path!=null){
+            	for(VertexInterface i :path){
+            		maze.MBox m = (maze.MBox) i;
+            		if(m.equals(labyrinth.getStartVertex()) || m.equals(labyrinth.getEndVertex()))continue;
+            		gameModel.set(m.getWidthCoordinate(),m.getLengthCoordinate(),GameModel.yellow);
+            		//notify(gameModel);
+            	}
             }
         }
         notify(gameModel);
@@ -170,7 +172,7 @@ public class MazeController extends FileMenu.GameController {
     public final synchronized void tictac()
     {
         if (debug){
-            System.err.println("lala");
+
         }
     }
 
@@ -189,6 +191,10 @@ public class MazeController extends FileMenu.GameController {
         for(WBox i:labyrinth.getWBox()){
         	if(i.getWidthCoordinate()==this.getGameX(e)&&i.getLengthCoordinate()==this.getGameY(e)){
         		labyrinth.getWBox().remove(i);
+        		DBox memo = (DBox) labyrinth.getStartVertex();
+        		labyrinth.addDBox(new DBox(getGameY(e), getGameX(e)));
+        		
+        		labyrinth.addDBox(memo);
         		return true;
         	}
         }
