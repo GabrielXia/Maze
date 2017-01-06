@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 
 import interfaces.*;
@@ -14,8 +13,6 @@ import java.util.List;
 
 import dijkstra.GraphInterface;
 import dijkstra.VertexInterface;
-
-import javax.swing.*;
 
 public final class Maze
 	implements GraphInterface
@@ -67,21 +64,21 @@ public final class Maze
 			if(line==height-1&&colone==width)break;
 			switch(in.read()){
 				case('A'):
-					endVertex = new ABox(line,colone,this);
+					endVertex = new ABox(line,colone);
 					boxes.get(line).add(endVertex);
 					colone++;
 					break;
 				case('D'):
-					startVertex = new DBox(line,colone,this);
+					startVertex = new DBox(line,colone);
 					boxes.get(line).add(startVertex);
 					colone++;
 					break;
 				case('E'):
-					boxes.get(line).add(new EBox(line,colone,this));
+					boxes.get(line).add(new EBox(line,colone));
 					colone++;
 					break;
 				case('W'):
-					wBox.add(new WBox(line,colone,this));
+					wBox.add(new WBox(line,colone));
 					boxes.get(line).add(wBox.get(wBox.size()-1));
 					colone++;
 					break;
@@ -119,7 +116,7 @@ public final class Maze
 		for(int line =0; line < height;line++){
 			boxes.add(new ArrayList<MBox>());
 			for(int colone=0; colone <width; colone++){
-				boxes.get(line).add(new EBox(line,colone,this));
+				boxes.get(line).add(new EBox(line,colone));
 			}
 		}
 		boxes.get(dBox.getLengthCoordinate()).set(dBox.getWidthCoordinate(),dBox);
@@ -143,7 +140,7 @@ public final class Maze
 		for(int line =0; line < height;line++){
 			boxes.add(new ArrayList<MBox>());
 			for(int colone=0; colone <width; colone++){
-				boxes.get(line).add(new EBox(line,colone,this));
+				boxes.get(line).add(new EBox(line,colone));
 			}
 		}
 

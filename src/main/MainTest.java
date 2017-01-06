@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import dijkstra.Dijkstra;
-import dijkstra.Previous;
 import dijkstra.PreviousInterface;
 import dijkstra.VertexInterface;
-import interfaces.GameModel;
-import maze.MBox;
 import maze.Maze;
 import maze.MazeReadingException;
 

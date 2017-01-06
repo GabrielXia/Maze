@@ -7,6 +7,11 @@ import java.util.Hashtable;
 public final class Pi extends Hashtable<VertexInterface,Integer> implements PiInterface{
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 201503101423L;
+
+	/**
 	 * set distance from this vertex to start in Pi
 	 * @param vertex
 	 * @param distance
