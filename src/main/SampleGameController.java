@@ -4,7 +4,7 @@ import interfaces.*;
 
 import java.awt.event.*;
 
-public class SampleGameController extends GameController
+public class SampleGameController extends FileMenu.GameController
 {
 	public static void main(String[] args) 
 	{
