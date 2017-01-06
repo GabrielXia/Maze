@@ -3,8 +3,8 @@ package maze;
 public final class DBox extends MBox{
 	/**Constructor
 	 * 
-	 * @param lengthCoordinate The horizontal coordinate of the box.
-	 * @param widthCoordinate The vertical coordinate of the box.
+	 * @param lengthCoordinate The vertical coordinate of the box.
+	 * @param widthCoordinate The horizontal coordinate of the box.
 	 * @param maze The maze where belongs the box.
 	 */
 	public DBox(int lengthCoordinate, int widthCoordinate) {

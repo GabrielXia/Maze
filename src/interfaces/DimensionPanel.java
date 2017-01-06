@@ -37,17 +37,17 @@ public class DimensionPanel {
         }
     }
 
-    /**get width
-     *
-     * @return
+    /**
+     *Returns the horizontal size of the maze.
+     * @return integer which is the horizontal size of the maze
      */
     public final int getWidth() {
         return width;
     }
 
-    /**get length
-     *
-     * @return
+    /**
+     *Returns the vertical size of the maze.
+     * @return integer which is the vertical size of the maze
      */
     public final int getLength() {
         return height;

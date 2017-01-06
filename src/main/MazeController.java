@@ -183,14 +183,28 @@ public class MazeController extends FileMenu.GameController {
         if(labyrinth.getStartVertex()==null)return false;
         else return labyrinth.getStartVertex().getWidthCoordinate()==this.getGameX(e)&&(labyrinth.getStartVertex().getLengthCoordinate()==this.getGameY(e));
     }
+    
+    public final boolean ifDeleteWBox(MouseEvent e){
+        if(labyrinth.getWBox()==null)return false;
+        for(WBox i:labyrinth.getWBox()){
+        	if(i.getWidthCoordinate()==this.getGameX(e)&&i.getLengthCoordinate()==this.getGameY(e)){
+        		labyrinth.getWBox().remove(i);
+        		return true;
+        	}
+        }
+        return false;
+    }
 
     /** Invoked when the mouse button has been clicked (pressed and released) on a component. */
     @Override
     public final synchronized void mouseClicked(MouseEvent e) {
         if (debug) {
+        	System.err.println("Mouse clicked");
             if (!e.isShiftDown()) {
-                System.err.println("Mouse clicked");
-                labyrinth.addWBox(new WBox(this.getGameY(e), this.getGameX(e)));
+            	if(!ifDeleteWBox(e)){
+            		labyrinth.addWBox(new WBox(this.getGameY(e), this.getGameX(e)));
+            	}
+                
             } else {
                 if (!ifSetABox(e)) {
                     labyrinth.addDBox(new DBox(getGameY(e), getGameX(e)));

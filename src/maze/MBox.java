@@ -8,19 +8,19 @@ public abstract class MBox
 	 */
 	
 	/**
-	 * The vertical coordinates of the box.
+	 * The horizontal coordinates of the box.
 	 */
 	private int widthCoordinate;
 	
 	/**
-	 * The horizontal coordinates of the box.
+	 * The vertical coordinates of the box.
 	 */
 	private int lengthCoordinate;
 	
 	/**Constructor
 	 * 
-	 * @param lengthCoordinate The horizontal coordinate of the box.
-	 * @param widthCoordinate The vertical coordinate of the box.
+	 * @param lengthCoordinate The vertical coordinate of the box.
+	 * @param widthCoordinate The horizontal coordinate of the box.
 	 * @param maze The maze where belongs the box.
 	 */
 	public MBox(int lengthCoordinate,int widthCoordinate){
@@ -30,7 +30,7 @@ public abstract class MBox
 	
 	
 	/**
-	 * @return the horizontal coordinate.
+	 * @return the vertical coordinate.
 	 */
 	public int getLengthCoordinate() {
 		return lengthCoordinate;
@@ -38,7 +38,7 @@ public abstract class MBox
 	
 	
 	/**
-	 * @return the vertical coordinate.
+	 * @return the horizontal coordinate.
 	 */
 	
 	public int getWidthCoordinate() {
