@@ -145,9 +145,9 @@ public class MazeController extends FileMenu.GameController {
     public void drawFromMaze(){
         gameModel.fillRectangle(0,0,gameWidth,gameHeight,GameModel.white);
         if(labyrinth.ifContainsStartVertex())
-        gameModel.set( ((maze.MBox)labyrinth.getStartVertex()).getWidthCoordinate(), ((maze.MBox)labyrinth.getStartVertex()).getLengthCoordinate(),GameModel.red);
+        gameModel.set( labyrinth.getStartVertex().getWidthCoordinate(), labyrinth.getStartVertex().getLengthCoordinate(),GameModel.red);
         if(labyrinth.ifContainsEndVertex())
-        gameModel.set( ((maze.MBox)labyrinth.getEndVertex()).getWidthCoordinate(), ((maze.MBox)labyrinth.getEndVertex()).getLengthCoordinate(),GameModel.blue);
+        gameModel.set( labyrinth.getEndVertex().getWidthCoordinate(), labyrinth.getEndVertex().getLengthCoordinate(),GameModel.blue);
         for(WBox i:labyrinth.getWBox()){
             gameModel.set( i.getWidthCoordinate(), i.getLengthCoordinate(),GameModel.black);
         }
@@ -181,7 +181,7 @@ public class MazeController extends FileMenu.GameController {
      */
     public final boolean ifSetABox(MouseEvent e){
         if(labyrinth.getStartVertex()==null)return false;
-        else return ((maze.MBox)labyrinth.getStartVertex()).getWidthCoordinate()==this.getGameX(e)&&(((maze.MBox)labyrinth.getStartVertex()).getLengthCoordinate()==this.getGameY(e));
+        else return labyrinth.getStartVertex().getWidthCoordinate()==this.getGameX(e)&&(labyrinth.getStartVertex().getLengthCoordinate()==this.getGameY(e));
     }
 
     /** Invoked when the mouse button has been clicked (pressed and released) on a component. */

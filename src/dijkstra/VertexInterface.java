@@ -14,5 +14,6 @@ public interface VertexInterface {
 	 * @return
 	 */
 	public String getLabel();
+
 	
 }
