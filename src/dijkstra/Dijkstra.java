@@ -2,9 +2,16 @@ package dijkstra;
 
 import interfaces.*;
 
+/** the class is a implements of Dijkstra */
+
 public class Dijkstra {
-	
-	public static PreviousInterface dijkstra(GraphInterface g,VertexInterface r){
+	/**
+	 * calculate the shortest path from a vertex to others in graph
+	 * @param g a graph
+	 * @param r the start vertex
+	 * @return paths to other vertex
+	 */
+	public static final PreviousInterface dijkstra(GraphInterface g,VertexInterface r){
 		PreviousInterface previous = new Previous(r);
 		ASetInterface a = new ASet();
 		PiInterface pi = new Pi();

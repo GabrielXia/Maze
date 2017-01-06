@@ -16,29 +16,53 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by XIAJin on 2016/12/30.
+ * This is the main controller of th
  */
 public class MazeController extends FileMenu.GameController {
+    /**
+     * this is  main function
+     * @param args
+     */
     public static void main(String[] args){
         Maze labyrinth = new Maze();
         new MazeController("Maze",labyrinth.getWidth(),labyrinth.getHeight(),30,30,labyrinth) ;
     }
 
     private final boolean debug = true ;
-    private int shiftClickTime = 0;
 
+    /** The model of this game*/
     private GameModel gameModel ;
 
+    /**The width of maze*/
     private int gameWidth ;
-    private int gameHeight ;
+
+    /**THe height of maze*/
+    private int gameHeight;
+
+    /** The width of each block*/
     private final int blockWidth ;
+
+    /** The height of each blaock*/
     private final int blockHeight ;
 
+    /** The game thread*/
     private final GameThread gameThread ;
 
+    /** The maze of this game*/
     private maze.Maze labyrinth;
+
+    /** The path from start box to end box*/
     ArrayList<VertexInterface> path;
 
+    /**
+     * Constructor
+     * @param name name of game
+     * @param gameWidth width of game
+     * @param gameHeight height of game
+     * @param blockWidth width of block
+     * @param blockHeight height of block
+     * @param maze maze of game
+     */
     public MazeController(String name, int gameWidth, int gameHeight, int blockWidth, int blockHeight, Maze maze)
     {
         super(name,gameWidth,gameHeight,blockWidth,blockHeight) ;
@@ -57,19 +81,34 @@ public class MazeController extends FileMenu.GameController {
         gameThread.start() ;
     }
 
-    public void setGameWidth(int gameWidth) {
+    /**
+     * getter of game width
+     * @param gameWidth
+     */
+    public final void setGameWidth(int gameWidth) {
         this.gameWidth = gameWidth;
     }
 
-    public void setGameHeight(int gameHeight) {
+    /**
+     * setter of game height
+     * @param gameHeight
+     */
+    public final void setGameHeight(int gameHeight) {
         this.gameHeight = gameHeight;
     }
 
-    public void setLabyrinth(Maze labyrinth) {
+    /**
+     * setter of maze
+     * @param labyrinth
+     */
+    public final void setLabyrinth(Maze labyrinth) {
         this.labyrinth = labyrinth;
     }
 
-    public void newMaze(){
+    /**
+     * start a new maze
+     */
+    public final void newMaze(){
         this.labyrinth = new Maze();
         this.setLabyrinth(labyrinth);
         this.setGameHeight(labyrinth.getHeight());
@@ -82,15 +121,27 @@ public class MazeController extends FileMenu.GameController {
 
     }
 
-    public  void saveMaze() throws FileNotFoundException{
+    /**
+     * save maze to data/labyrinthe.txt
+     * @throws FileNotFoundException
+     */
+    public  final void saveMaze() throws FileNotFoundException{
         labyrinth.saveToTextFile("data/labyrinthe.txt");
     }
 
-    public void loadMaze() throws IOException,MazeReadingException{
+    /**
+     * load maze from data/labyrinthe.txt
+     * @throws IOException
+     * @throws MazeReadingException
+     */
+    public final void loadMaze() throws IOException,MazeReadingException{
         labyrinth.initFromTextFile("data/labyrinthe.txt");
         drawFromMaze();
     }
 
+    /**
+     * refresh game model from maze in memory
+     */
     public void drawFromMaze(){
         gameModel.fillRectangle(0,0,gameWidth,gameHeight,GameModel.white);
         if(labyrinth.ifContainsStartVertex())
@@ -112,11 +163,25 @@ public class MazeController extends FileMenu.GameController {
         }
         notify(gameModel);
     }
+
+    /**
+     * this function run every period
+     */
     public final synchronized void tictac()
     {
         if (debug){
             System.err.println("lala");
         }
+    }
+
+    /**
+     * test if there is already an ABox
+     * @param e
+     * @return
+     */
+    public final boolean ifSetABox(MouseEvent e){
+        if(labyrinth.getStartVertex()==null)return false;
+        else return ((maze.MBox)labyrinth.getStartVertex()).getWidthCoordinate()==this.getGameX(e)&&(((maze.MBox)labyrinth.getStartVertex()).getLengthCoordinate()==this.getGameY(e));
     }
 
     /** Invoked when the mouse button has been clicked (pressed and released) on a component. */
@@ -127,19 +192,14 @@ public class MazeController extends FileMenu.GameController {
                 System.err.println("Mouse clicked");
                 labyrinth.addWBox(new WBox(this.getGameY(e), this.getGameX(e), labyrinth));
             } else {
-                if (shiftClickTime == 0) {
+                if (!ifSetABox(e)) {
                     labyrinth.addDBox(new DBox(getGameY(e), getGameX(e), labyrinth));
-                    shiftClickTime++;
-                } else if (shiftClickTime == 1) {
+                } else {
                     labyrinth.addABox(new maze.ABox(getGameY(e), getGameX(e), labyrinth));
+
                 }
             }
-
             drawFromMaze();
-
-
-
-
         }
     }
 
@@ -248,7 +308,11 @@ public class MazeController extends FileMenu.GameController {
             }
 
             if(e.isControlDown() && e.getKeyCode()==KeyEvent.VK_N){
-                    newMaze();
+                newMaze();
+            }
+
+            if(e.isControlDown() && e.getKeyCode()==KeyEvent.VK_Q){
+                System.exit(0);
             }
         }
     }
