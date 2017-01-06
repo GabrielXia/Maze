@@ -15,6 +15,8 @@ import java.util.List;
 import dijkstra.GraphInterface;
 import dijkstra.VertexInterface;
 
+import javax.swing.*;
+
 public class Maze 
 	implements GraphInterface
 {
@@ -129,6 +131,13 @@ public class Maze
 	}
 
 	public Maze(){
+		JOptionPane.showMessageDialog(null, "A Click to put a mur\n" +
+				"A first Shift Click to put a start box\n" +
+				"The following Shift Click to put the end box\n" +
+				"Control+S to save\n" +
+				"Control+L to load the game saved\n" +
+				"Control+N to open a new game\n" +
+				"Control+Q to quit");
 		DimensionPanel dimensionPanel = new DimensionPanel();
 		width = dimensionPanel.getWidth();
 		height = dimensionPanel.getLength();
