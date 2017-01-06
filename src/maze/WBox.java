@@ -1,6 +1,6 @@
 package maze;
 
-public class WBox extends MBox{
+public final class WBox extends MBox{
 	
 	/**Constructor
 	 * 

@@ -4,7 +4,7 @@ import interfaces.*;
 
 /** the class is a implements of Dijkstra */
 
-public class Dijkstra {
+public final class Dijkstra {
 	/**
 	 * calculate the shortest path from a vertex to others in graph
 	 * @param g a graph

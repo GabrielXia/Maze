@@ -1,11 +1,13 @@
 package dijkstra;
 
+import interfaces.ErrorWindows;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 /** This class implements PreviousInterface*/
-public class Previous extends Hashtable<VertexInterface,VertexInterface> implements PreviousInterface {
+public final class Previous extends Hashtable<VertexInterface,VertexInterface> implements PreviousInterface {
 
 	/**The start vertex in graph*/
 	private final VertexInterface start;
@@ -52,7 +54,7 @@ public class Previous extends Hashtable<VertexInterface,VertexInterface> impleme
 			}
 			return shortestPath;
 		} catch (NullPointerException e) {
-			JOptionPane.showMessageDialog(null, "There is no solution");
+			ErrorWindows.errorNoSolution();
 			return null;
 		}
 	}

@@ -31,7 +31,7 @@ public class DimensionPanel {
                 height = Integer.parseInt(yField.getText());
             }
         }catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(null,"Please enter width and height !");
+            ErrorWindows.errorEntered();
             System.exit(1);
 
         }
