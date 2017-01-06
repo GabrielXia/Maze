@@ -170,7 +170,6 @@ public class MazeController extends FileMenu.GameController {
     public final synchronized void tictac()
     {
         if (debug){
-            System.err.println("lala");
         }
     }
 
