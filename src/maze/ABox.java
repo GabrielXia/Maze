@@ -1,6 +1,6 @@
 package maze;
 
-public class ABox extends MBox{
+public final class ABox extends MBox{
 	/**Constructor
 	 * 
 	 * @param lengthCoordinate The horizontal coordinate of the box.

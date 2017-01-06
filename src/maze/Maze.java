@@ -17,7 +17,7 @@ import dijkstra.VertexInterface;
 
 import javax.swing.*;
 
-public class Maze 
+public final class Maze
 	implements GraphInterface
 {
 
@@ -29,12 +29,12 @@ public class Maze
 	/**
 	 * The box witch beginning of the maze.
 	 */
-	private DBox startVertex;
+	private MBox startVertex;
 	
 	/**
 	 * The box which is the exit of the maze.
 	 */
-	private ABox endVertex;
+	private MBox endVertex;
 	
 	/**
 	 * One dimension array containing all the wall boxes of the maze.
@@ -134,13 +134,7 @@ public class Maze
 	 * 
 	 */
 	public Maze(){
-		JOptionPane.showMessageDialog(null, "A Click to put a wall(block black)\n" +
-				"A Shift Click on a block to put a start box(block red)\n" +
-				"A Shift Click on a start box to put the end box(block blue)\n" +
-				"Control+S to save\n" +
-				"Control+L to load the game saved\n" +
-				"Control+N to open a new game\n" +
-				"Control+Q to quit");
+		ReminderWindows.reminderUtilization();
 		DimensionPanel dimensionPanel = new DimensionPanel();
 		width = dimensionPanel.getWidth();
 		height = dimensionPanel.getLength();
@@ -297,7 +291,7 @@ public class Maze
 	/**
 	 * @return Returns the departure box of the maze
 	 */
-	public final VertexInterface getStartVertex() {
+	public final MBox getStartVertex() {
 		return startVertex;
 	}
 	
@@ -305,7 +299,7 @@ public class Maze
 	/**
 	 * @return Returns the arrival box of the maze
 	 */
-	public final VertexInterface getEndVertex(){
+	public final MBox getEndVertex(){
 		return endVertex;
 	}
 	

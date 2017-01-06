@@ -4,7 +4,7 @@ import java.util.Hashtable;
 
 /**This class implement PiInterface*/
 
-public class Pi extends Hashtable<VertexInterface,Integer> implements PiInterface{
+public final class Pi extends Hashtable<VertexInterface,Integer> implements PiInterface{
 
 	/**
 	 * set distance from this vertex to start in Pi
