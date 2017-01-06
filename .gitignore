@@ -3,6 +3,8 @@
 /.settings/
 /bin/
 /.metadata/
+/.DS_Store
+/JavaProject.iml
 /.idea/
 *.iml
 /out/
