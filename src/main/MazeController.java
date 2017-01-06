@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * This is the main controller of th
+ * This is the main controller of the game
  */
 public class MazeController extends FileMenu.GameController {
     /**
