@@ -39,12 +39,12 @@ public final class Maze
 	private ArrayList<WBox> wBox;
 	
 	/**
-	 * The vertical size of the maze.
+	 * The horizontal size of the maze.
 	 */
 	public int width;
 	
 	/**
-	 * The horizontal size of the maze.
+	 * The vertical size of the maze.
 	 */
 	public int height;
 	
@@ -241,7 +241,7 @@ public final class Maze
 	
 	/**
 	 * 
-	 * @return Returns the horizontal size of the maze.
+	 * @return Returns the vertical size of the maze.
 	 */
 	public final int getHeight(){
 		return height;
@@ -249,7 +249,7 @@ public final class Maze
 	
 	/**
 	 * 
-	 * @return Returns the vertical size of the maze.
+	 * @return Returns the horizontal size of the maze.
 	 */
 	public final int getWidth(){
 		return width;
