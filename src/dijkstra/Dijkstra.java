@@ -11,7 +11,7 @@ public class Dijkstra {
 	 * @param r the start vertex
 	 * @return paths to other vertex
 	 */
-	public static PreviousInterface dijkstra(GraphInterface g,VertexInterface r){
+	public static final PreviousInterface dijkstra(GraphInterface g,VertexInterface r){
 		PreviousInterface previous = new Previous(r);
 		ASetInterface a = new ASet();
 		PiInterface pi = new Pi();

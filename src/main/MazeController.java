@@ -308,7 +308,11 @@ public class MazeController extends FileMenu.GameController {
             }
 
             if(e.isControlDown() && e.getKeyCode()==KeyEvent.VK_N){
-                    newMaze();
+                newMaze();
+            }
+
+            if(e.isControlDown() && e.getKeyCode()==KeyEvent.VK_Q){
+                System.exit(0);
             }
         }
     }
