@@ -190,12 +190,12 @@ public class MazeController extends FileMenu.GameController {
         if (debug) {
             if (!e.isShiftDown()) {
                 System.err.println("Mouse clicked");
-                labyrinth.addWBox(new WBox(this.getGameY(e), this.getGameX(e), labyrinth));
+                labyrinth.addWBox(new WBox(this.getGameY(e), this.getGameX(e)));
             } else {
                 if (!ifSetABox(e)) {
-                    labyrinth.addDBox(new DBox(getGameY(e), getGameX(e), labyrinth));
+                    labyrinth.addDBox(new DBox(getGameY(e), getGameX(e)));
                 } else {
-                    labyrinth.addABox(new maze.ABox(getGameY(e), getGameX(e), labyrinth));
+                    labyrinth.addABox(new maze.ABox(getGameY(e), getGameX(e)));
 
                 }
             }

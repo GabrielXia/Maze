@@ -1,10 +1,9 @@
 package dijkstra;
 
-import interfaces.*;
 
 /** This class implements the Dijkstra algorithm. */
 
-public class Dijkstra {
+public final class Dijkstra {
 	
 	
 	/**

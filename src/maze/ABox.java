@@ -1,14 +1,15 @@
 package maze;
 
 public final class ABox extends MBox{
+	
 	/**Constructor
 	 * 
 	 * @param lengthCoordinate The horizontal coordinate of the box.
 	 * @param widthCoordinate The vertical coordinate of the box.
 	 * @param maze The maze where belongs the box.
 	 */
-	public ABox(int lengthCoordinate, int widthCoordinate, Maze maze) {
-		super(lengthCoordinate, widthCoordinate, maze);
+	public ABox(int lengthCoordinate, int widthCoordinate) {
+		super(lengthCoordinate, widthCoordinate);
 	}
 	
 	/**

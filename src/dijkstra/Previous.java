@@ -2,13 +2,16 @@ package dijkstra;
 
 import interfaces.ErrorWindows;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 /** This class implements PreviousInterface*/
 public final class Previous extends Hashtable<VertexInterface,VertexInterface> implements PreviousInterface {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 201503101423L;
 	/**The start vertex in graph*/
 	private final VertexInterface start;
 

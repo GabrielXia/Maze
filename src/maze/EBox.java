@@ -9,8 +9,8 @@ public final class EBox extends MBox{
 	 * @param maze The maze where belongs the box.
 	 */
 	
-	public EBox(int lengthCoordinate, int widthCoordinate, Maze maze) {
-		super(lengthCoordinate, widthCoordinate, maze);
+	public EBox(int lengthCoordinate, int widthCoordinate) {
+		super(lengthCoordinate, widthCoordinate);
 	}
 
 	
