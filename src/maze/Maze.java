@@ -131,9 +131,9 @@ public class Maze
 	}
 
 	public Maze(){
-		JOptionPane.showMessageDialog(null, "A Click to put a mur\n" +
-				"A first Shift Click to put a start box\n" +
-				"The following Shift Click to put the end box\n" +
+		JOptionPane.showMessageDialog(null, "A Click to put a wall(block black)\n" +
+				"A Shift Click on a block to put a start box(block red)\n" +
+				"A Shift Click on a start box to put the end box(block blue)\n" +
 				"Control+S to save\n" +
 				"Control+L to load the game saved\n" +
 				"Control+N to open a new game\n" +
