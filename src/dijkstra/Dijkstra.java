@@ -2,14 +2,16 @@ package dijkstra;
 
 import interfaces.*;
 
-/** the class is a implements of Dijkstra */
+/** This class implements the Dijkstra algorithm. */
 
 public class Dijkstra {
+	
+	
 	/**
-	 * calculate the shortest path from a vertex to others in graph
-	 * @param g a graph
-	 * @param r the start vertex
-	 * @return paths to other vertex
+	 * Calculates the shortest path from a vertex to the others in a graph.
+	 * @param g graph to which we want to apply the Djikstra algorithm
+	 * @param r vertex whose distance to others we want to know
+	 * @return the path to the other vertices
 	 */
 	public static final PreviousInterface dijkstra(GraphInterface g,VertexInterface r){
 		PreviousInterface previous = new Previous(r);
@@ -33,7 +35,7 @@ public class Dijkstra {
 				}
 			}
 			
-			//find y not in A that pi(y) is minimal
+			//find y not in A where pi(y) is minimal
 			Integer minimal = Integer.MAX_VALUE;
 			VertexInterface y = null;
 			for(VertexInterface i:g.getAllVertices()){
