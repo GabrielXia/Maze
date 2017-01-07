@@ -21,7 +21,7 @@ Folder data contains text to store maze information, it's used for "save" and "l
 - Enter the width and height
 - A click to put a wall in a block, a second click to delete the wall
 - A shift-click on an empty block to put a start block
-- A shift-click on a start block to put an end block (When there are start box and end box, the shortest path shows !)
+- A shift-click on a start block to put an end block(When there are start box and end box, the shortest path shows!)
 - `ctrl + s` to save the maze  
 - `ctrl + l` to load the maze that you save
 - `ctrl + n` to start a new maze
